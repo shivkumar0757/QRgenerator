@@ -13,16 +13,20 @@
         Content: <input type="text" id="code" placeholder="Type Here..." >
     </div>
 
-    <div>
+    <div >
         <span id="qmsg" ><h5 class="m-5  text-center">Type something to generate QR.....</h5></span>
-        <img id="ItemPreview" src="">
+        <div id="qrImage">
+            <img id="ItemPreview" src="">
+            <a download="qrCode.png" href="" id="dLink" class="btn btn-info">Download</a>
+        </div >
+
     </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded',() => {
         const inp = document.querySelector('#code');
-        document.querySelector('#ItemPreview').style.display= 'none';
+        document.querySelector('#qrImage').style.display= 'none';
         inp.addEventListener('input', () => {
             // console.log('clicked');
             genQR(inp.value);
@@ -31,12 +35,13 @@
     })
 
     const img=document.getElementById("ItemPreview");
+    const dbtn = document.getElementById("dLink");
     function genQR(code)
     {
-        document.querySelector('#ItemPreview').style.display= 'block';
+        document.querySelector('#qrImage').style.display= 'block';
         document.querySelector('#qmsg').style.display= 'none';
         if (code.length ==0){
-            document.querySelector('#ItemPreview').style.display= 'none';
+            document.querySelector('#qrImage').style.display= 'none';
             document.querySelector('#qmsg').style.display= 'block';
             code=' ';
         }
@@ -45,6 +50,8 @@
         then(function(response) {
             return response.text().then(function(text) {
                 img.src = "data:image/png;base64," + text;
+
+                dbtn.href = 'data:image/png;base64,'+text;
             });
         });
     }

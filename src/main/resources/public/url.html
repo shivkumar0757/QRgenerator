@@ -4,6 +4,42 @@
 </head>
 
 <body>
-    Urlsortner app here...
+<div>
+
+</div>
+<input id="url-inp" type="url">
+<button id="url-btn" onclick="getSort()"> Generate</button>
 </body>
+<div id="msg"></div>
+
+<script>
+    function getSort(){
+        var text= document.querySelector("#url-inp").value;
+        var msg='';
+        fetch('/urls/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                originalUrl : text
+            })
+        })
+            .then(response => {
+                console.log(response.status)
+                return response.json();})
+            .then(result => {
+                // Print result
+                msg+= 'original url: '+ text.vaue;
+
+                text.innerHTML='';
+                msg+= 'Sort Url: '+window.location.href.slice(0,-5)+'s/'+result.hash;
+                document.querySelector("#msg").innerHTML=msg;
+                console.log(result);
+            });
+    }
+
+</script>
+
 </html>
