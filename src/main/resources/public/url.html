@@ -31,10 +31,10 @@
                 return response.json();})
             .then(result => {
                 // Print result
-                msg+= 'original url: '+ text.value;
+                msg+= 'original url: '+ document.querySelector("#url-inp").value;
 
-                text.innerHTML='';
-                msg+= '\n Sort Url: '+window.location.href.slice(0,-5)+'s/'+result.hash;
+                document.querySelector("#url-inp").innerHTML='';
+                msg+= '<br/> Sort Url: <b></b>'+window.location.href.slice(0,-5)+'s/'+result.hash;
                 document.querySelector("#msg").innerHTML=msg;
                 console.log(result);
             });
