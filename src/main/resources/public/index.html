@@ -44,7 +44,7 @@
         fetch(url).
         then(function(response) {
             return response.text().then(function(text) {
-                img.src = "data:image/jpeg;base64," + text;
+                img.src = "data:image/png;base64," + text;
             });
         });
     }
