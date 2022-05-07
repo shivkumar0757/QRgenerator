@@ -40,7 +40,7 @@
             document.querySelector('#qmsg').style.display= 'block';
             code=' ';
         }
-        var url = 'http://localhost:8080/genrateQRCode/'+code+'/350/350';
+        var url = 'genrateQRCode/'+code+'/350/350';
         fetch(url).
         then(function(response) {
             return response.text().then(function(text) {
