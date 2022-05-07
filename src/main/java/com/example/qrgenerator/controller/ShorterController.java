@@ -55,6 +55,8 @@ public class ShorterController {
         Shorter shorter = repository.findByHash(hash);
         if (shorter != null) {
             HttpHeaders headers = new HttpHeaders();
+            System.out.println(shorter.getOriginalUrl());
+            System.out.println(shorter.getHash());
             headers.add("Location", shorter.getOriginalUrl());
             return new ResponseEntity<String>(headers, HttpStatus.FOUND);
         } else {
@@ -62,7 +64,7 @@ public class ShorterController {
         }
     }
 
-    @GetMapping
+    @GetMapping(path = "allurls/")
     public ResponseEntity getAll() {
         return ResponseEntity.ok(repository.findAll());
     }
